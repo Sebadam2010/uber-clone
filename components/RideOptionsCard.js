@@ -46,7 +46,7 @@ const RideOptionsCard = () => {
           <Icon name="chevron-left" type="fontawesome" />
         </TouchableOpacity>
         <Text style={tw` text-center text-xl z-0`}>
-          Select a ride - {travelTimeInformation?.distance.text}
+          Select a ride - {travelTimeInformation?.distance?.text}
         </Text>
       </View>
 
@@ -71,10 +71,21 @@ const RideOptionsCard = () => {
 
             <View style={tw`-ml-6`}>
               <Text style={tw`text-xl font-semibold`}>{item.title}</Text>
-              <Text>{travelTimeInformation?.duration.text} travel time</Text>
+              <Text>{travelTimeInformation?.duration?.text} travel time</Text>
             </View>
             <Text style={tw`text-xl`}>
-              {new Intl.NumberFormat("en-gb", {
+              {/* UNABLE TO USE NORMAL INTL OR FORMATTED NUMBER FROM "react-intl"*/}
+              {/* <FormattedNumber
+                value={
+                  (travelTimeInformation?.duration.value *
+                    SURGE_CHARGE_RATE *
+                    multiplier) /
+                  100
+                }
+                style="currency"
+                currency="GBP"
+              /> */}
+              {/* {new Intl.NumberFormat("en-gb", {
                 style: "currency",
                 currency: "GBP",
               }).format(
@@ -82,13 +93,20 @@ const RideOptionsCard = () => {
                   SURGE_CHARGE_RATE *
                   multiplier) /
                   100
-              )}
+              )} */}
+              £
+              {parseFloat(
+                (travelTimeInformation?.duration.value *
+                  SURGE_CHARGE_RATE *
+                  item.multiplier) /
+                  100
+              ).toFixed(2)}
             </Text>
           </TouchableOpacity>
         )}
       />
 
-      <View>
+      <View style={tw`mt-auto border-t border-gray-200`}>
         <TouchableOpacity
           disabled={!selected}
           style={tw`bg-black py-3 ${!selected && `bg-gray-300`}`}

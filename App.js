@@ -8,13 +8,6 @@ import { SafeAreaProvider } from "react-native-safe-area-context";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
-if (Platform.OS === "android") {
-  // See https://github.com/expo/expo/issues/6536 for this issue.
-  if (Intl.__disableRegExpRestore === "function") {
-    Intl.__disableRegExpRestore();
-  }
-}
-
 export default function App() {
   const Stack = createNativeStackNavigator();
 
